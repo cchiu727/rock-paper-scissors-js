@@ -1,7 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 * {
-    
+    font-family: 'Roboto', sans-serif;
 }
 
 h1 {
+    text-align: center;
+}
+
+.game-scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    width: 80px;
+}
+
+label {
+    float: left;
+    padding: 0 1em;
     text-align: center;
 }
