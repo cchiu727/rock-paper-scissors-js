@@ -1,20 +1,39 @@
-/**
- * randomly return either 'Rock', 'Paper', or 'Scissors'
- */
-function getComputerChoice() {
-    const choices = ['Rock', 'Paper', 'Scissors'];
+const playerScoreLabel = document.getElementById('player-score-label');
+const computerScoreLabel = document.getElementById('computer-score-label');
 
-    return choices[Math.floor(Math.random() * 3)];
+const startGameBtn = document.getElementById('start-game-btn');
+
+startGameBtn.addEventListener('click', startNewGame);
+
+function startNewGame() {
+    let currentGame = new RockPaperScissors();
+    currentGame.play();
 }
 
-/**
- * return a string that declares the winner of the round
- * @param {string} playerSelection 
- * @param {string} computerSelection 
- */
-function playRound(playerSelection, computerSelection) {
-    let playerChoice = prompt('Enter your choice (Rock, Paper, Scissors)').toLowerCase();
-    let computerChoice = getComputerChoice().toLowerCase();
+function updatePlayerScoreLabel(num) {
+    playerScoreLabel.innerHTML = num;
+}
+
+function updateComputerScoreLabel(num) {
+    computerScoreLabel.innerHTML = num;
+}
+
+class RockPaperScissors {
+    constructor() {
+        this.playerScore = 0;
+        this.computerScore = 0;
+        this.rounds = 0;
+    }
+
+    getComputerChoice() {
+        const choices = ['Rock', 'Paper', 'Scissors'];
+
+        return choices[Math.floor(Math.random() * 3)];
+    }
+
+    playRound(playerSelection, computerSelection) {
+        let playerChoice = prompt('Enter your choice (Rock, Paper, Scissors)').toLowerCase();
+        let computerChoice = getComputerChoice().toLowerCase();
 
     if (playerChoice === 'rock') {
         if (computerChoice === 'rock') {
@@ -60,27 +79,9 @@ function playRound(playerSelection, computerSelection) {
     }
 
     return 'tie';
-}
+    }
 
-/**
- * Play a 5 round game that keeps score and reports a winner or loser
- * at the end
- */
-function game() {
-    let winner;
-    let playerScore = 0;
-    let computerScore = 0;
-
-    while (!winner) {
-        let roundWinner = playRound();
-
-        if (roundWinner === 'player') {
-            playerScore++;
-        }
-        else {
-            computerScore++;
-        }
+    play() {
+        this.playRound();
     }
 }
-
-game();

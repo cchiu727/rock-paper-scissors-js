@@ -8,17 +8,15 @@ h1 {
     text-align: center;
 }
 
-.game-scene {
+
+#game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-button {
-    width: 80px;
-}
 
-label {
+.choice-label {
     float: left;
     padding: 0 1em;
     text-align: center;
