@@ -45,8 +45,7 @@ class RockPaperScissors {
         let playerChoice = prompt(`Enter your choice:
         1 - Rock
         2 - Paper
-        3 - Scissors
-        `);
+        3 - Scissors`);
 
         if (playerChoice) {
             if (playerChoice > 0 && playerChoice < 4) {
@@ -59,11 +58,11 @@ class RockPaperScissors {
         }
         else if (playerChoice === '') {
             alert('Invalid input, retry.');
-            return this.getPlayerChoice();
+            this.getPlayerChoice();
         }
         else {
             alert('Invalid input, retry.');
-            return this.getPlayerChoice();
+            this.getPlayerChoice();
         }
     }
 
