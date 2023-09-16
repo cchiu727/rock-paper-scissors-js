@@ -23,14 +23,18 @@ class RockPaperScissors {
         this.computerScore = 0;
         this.rounds = 0;
         this.choices = ['rock', 'paper', 'scissors'];
+        updatePlayerScoreLabel(0);
+        updateComputerScoreLabel(0);
     }
 
-    updatePlayerScore(num=1) {
+    updatePlayerScore(num = 1) {
         this.playerScore += num;
+        console.log(`Player score: ${this.playerScore}`);
     }
 
-    updateComputerScore(num=1) {
-        this.playerScore += num;
+    updateComputerScore(num = 1) {
+        this.computerScore += num;
+        console.log(`Computer score: ${this.computerScore}`);
     }
 
     getComputerChoice() {
@@ -44,45 +48,68 @@ class RockPaperScissors {
         3 - Scissors
         `);
 
-        return this.choices[playerChoice - 1];
+        if (playerChoice) {
+            if (playerChoice > 0 && playerChoice < 4) {
+                return this.choices[playerChoice - 1];
+            }
+            else {
+                alert('Invalid input, retry.');
+                return this.getPlayerChoice();
+            }
+        }
+        else if (playerChoice === '') {
+            alert('Invalid input, retry.');
+            return this.getPlayerChoice();
+        }
+        else {
+            alert('Invalid input, retry.');
+            return this.getPlayerChoice();
+        }
     }
 
     playRound(playerSelection, computerSelection) {
         if (playerSelection === 'rock') {
             if (computerSelection === 'rock') {
+                console.log(`Round ${this.rounds}: Tie`);
                 return 'tie';
             }
             else if (computerSelection === 'paper') {
+                console.log(`Round ${this.rounds}: Player loses`);
                 return 'lose';
             }
             else {
+                console.log(`Round ${this.rounds}: Player wins`);
                 return 'win';
             }
         }
         else if (playerSelection === 'paper') {
             if (computerSelection === 'rock') {
+                console.log(`Round ${this.rounds}: Player wins`);
                 return 'win';
             }
             else if (computerSelection === 'paper') {
+                console.log(`Round ${this.rounds}: Tie`);
                 return 'tie';
             }
             else {
+                console.log(`Round ${this.rounds}: Player loses`);
                 return 'lose';
             }
         }
         else {
             if (computerSelection === 'rock') {
+                console.log(`Round ${this.rounds}: Player loses`);
                 return 'lose';
             }
             else if (computerSelection === 'paper') {
+                console.log(`Round ${this.rounds}: Player wins`);
                 return 'win';
             }
             else {
+                console.log(`Round ${this.rounds}: Tie`);
                 return 'tie';
             }
         }
-
-        return 'tie';
     }
 
     handleRoundEnd(result) {
@@ -101,7 +128,7 @@ class RockPaperScissors {
         let computerSelection;
         let winner;
 
-        while (this.rounds < 6) {
+        while (this.rounds < 5) {
             playerSelection = this.getPlayerChoice();
             computerSelection = this.getComputerChoice();
 
