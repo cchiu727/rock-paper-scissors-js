@@ -1,140 +1,125 @@
-const playerScoreLabel = document.getElementById('player-score-label');
-const computerScoreLabel = document.getElementById('computer-score-label');
+class Winner {
+    constructor(element) {
+        this.winnerLabel = element;
+    }
 
-const startGameBtn = document.getElementById('start-game-btn');
-startGameBtn.addEventListener('click', startNewGame);
-
-function updatePlayerScoreLabel(num) {
-    playerScoreLabel.innerHTML = num;
+    updateWinnerLabel(text) {
+        this.winnerLabel.textContent = text;
+    }
 }
 
-function updateComputerScoreLabel(num) {
-    computerScoreLabel.innerHTML = num;
+class Score {
+    constructor(element) {
+        this.scoreLabel = element;
+        this.scoreValue = 0;
+    }
+
+    updateScore(num=1) {
+        this.scoreValue += num;
+    }
+
+    updateScoreLabel() {
+        this.scoreLabel.textContent = this.scoreValue;
+    }
 }
 
-function startNewGame() {
-    const currentGame = new RockPaperScissors();
-    currentGame.play();
+class Choice {
+    constructor(element, value) {
+        this.button = element;
+        this.value = value;
+    }
 }
 
 class RockPaperScissors {
     constructor() {
-        this.playerScore = 0;
-        this.computerScore = 0;
-        this.rounds = 0;
         this.choices = ['rock', 'paper', 'scissors'];
-        updatePlayerScoreLabel(0);
-        updateComputerScoreLabel(0);
-    }
-
-    updatePlayerScore(num = 1) {
-        this.playerScore += num;
-        console.log(`Player score: ${this.playerScore}`);
-    }
-
-    updateComputerScore(num = 1) {
-        this.computerScore += num;
-        console.log(`Computer score: ${this.computerScore}`);
+        this.rounds = 0;
     }
 
     getComputerChoice() {
         return this.choices[Math.floor(Math.random() * 3)];
     }
 
-    getPlayerChoice() {
-        let playerChoice = prompt(`Enter your choice:
-        1 - Rock
-        2 - Paper
-        3 - Scissors`);
-
-        if (playerChoice) {
-            if (playerChoice > 0 && playerChoice < 4) {
-                return this.choices[playerChoice - 1];
-            }
-            else {
-                alert('Invalid input, retry.');
-                return this.getPlayerChoice();
-            }
-        }
-        else if (playerChoice === '') {
-            alert('Invalid input, retry.');
-            this.getPlayerChoice();
-        }
-        else {
-            alert('Invalid input, retry.');
-            this.getPlayerChoice();
-        }
-    }
-
     playRound(playerSelection, computerSelection) {
+        this.rounds++;
+
         if (playerSelection === 'rock') {
             if (computerSelection === 'rock') {
                 console.log(`Round ${this.rounds}: Tie`);
-                return 'tie';
+                winner.updateWinnerLabel('Tie!');
             }
             else if (computerSelection === 'paper') {
                 console.log(`Round ${this.rounds}: Player loses`);
-                return 'lose';
+                computerScore.updateScore();
+                computerScore.updateScoreLabel();
+                winner.updateWinnerLabel('Computer wins!');
             }
             else {
                 console.log(`Round ${this.rounds}: Player wins`);
-                return 'win';
+                playerScore.updateScore();
+                playerScore.updateScoreLabel();
+                winner.updateWinnerLabel('Player wins!');
             }
         }
         else if (playerSelection === 'paper') {
             if (computerSelection === 'rock') {
                 console.log(`Round ${this.rounds}: Player wins`);
-                return 'win';
+                playerScore.updateScore();
+                playerScore.updateScoreLabel();
+                winner.updateWinnerLabel('Player wins!');
             }
             else if (computerSelection === 'paper') {
                 console.log(`Round ${this.rounds}: Tie`);
-                return 'tie';
+                winner.updateWinnerLabel('Tie!');
+
             }
             else {
                 console.log(`Round ${this.rounds}: Player loses`);
-                return 'lose';
+                computerScore.updateScore();
+                computerScore.updateScoreLabel();
+                winner.updateWinnerLabel('Computer wins!');
             }
         }
         else {
             if (computerSelection === 'rock') {
                 console.log(`Round ${this.rounds}: Player loses`);
-                return 'lose';
+                computerScore.updateScore();
+                computerScore.updateScoreLabel();
+                winner.updateWinnerLabel('Computer wins!');
             }
             else if (computerSelection === 'paper') {
                 console.log(`Round ${this.rounds}: Player wins`);
-                return 'win';
+                playerScore.updateScore();
+                playerScore.updateScoreLabel();
+                winner.updateWinnerLabel('Player wins!');
             }
             else {
                 console.log(`Round ${this.rounds}: Tie`);
-                return 'tie';
+                winner.updateWinnerLabel('Tie!');
             }
         }
     }
-
-    handleRoundEnd(result) {
-        if (result === 'win') {
-            this.updatePlayerScore();
-            updatePlayerScoreLabel(this.playerScore);
-        }
-        else if (result === 'lose') {
-            this.updateComputerScore();
-            updateComputerScoreLabel(this.computerScore);
-        }
-    }
-
-    play() {
-        let playerSelection;
-        let computerSelection;
-        let winner;
-
-        while (this.rounds < 5) {
-            playerSelection = this.getPlayerChoice();
-            computerSelection = this.getComputerChoice();
-
-            winner = this.playRound(playerSelection, computerSelection);
-            this.handleRoundEnd(winner);
-
-            this.rounds++;
-        }
-    }
 }
+
+const playerScore = new Score(document.getElementById('player-score-label'));
+const computerScore = new Score(document.getElementById('computer-score-label'));
+
+const winner = new Winner(document.getElementById('winner-label'));
+
+const choiceRockBtn = document.getElementById('choice-rock-btn');
+const choicePaperBtn = document.getElementById('choice-paper-btn');
+const choiceScissorsBtn = document.getElementById('choice-scissors-btn');
+
+const game = new RockPaperScissors(playerScore, computerScore);
+
+choiceRockBtn.addEventListener('click', () => {
+    game.playRound('game', game.getComputerChoice());
+});
+
+choicePaperBtn.addEventListener('click', () => {
+    game.playRound('game', game.getComputerChoice());
+});
+
+choiceScissorsBtn.addEventListener('click', () => {
+    game.playRound('game', game.getComputerChoice());
+});

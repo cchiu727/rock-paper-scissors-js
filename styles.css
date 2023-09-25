@@ -13,3 +13,66 @@ main {
     flex-direction: column;
     align-items: center;
 }
+
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+.parent-scores-container {
+    display: flex;
+    justify-content: center;
+    gap: 75px;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.score-label {
+    margin: 20px;
+    font-size: 42px;
+}
+
+.choice-container {
+    width: 50vw;
+    margin: 50px;
+    padding: 50px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+
+.choice-btn {
+    width: 100px;
+    height: 100px;
+    font-size: 48px;
+    background-color: transparent;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+
+.choice-btn:hover {
+    background-color: rgb(233, 233, 233);
+}
+
+.selected {
+    background-color: darkgrey;
+}
+
+.btn {
+    background-color: transparent;
+    border: 3px solid black;
+    border-radius: 8px;
+    width: 100px;
+    height: 50px;
+}
+
+.btn:hover {
+    background-color: lightgrey;
+}
