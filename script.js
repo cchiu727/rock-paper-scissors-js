@@ -113,13 +113,13 @@ const choiceScissorsBtn = document.getElementById('choice-scissors-btn');
 const game = new RockPaperScissors(playerScore, computerScore);
 
 choiceRockBtn.addEventListener('click', () => {
-    game.playRound('game', game.getComputerChoice());
+    game.playRound('rock', game.getComputerChoice());
 });
 
 choicePaperBtn.addEventListener('click', () => {
-    game.playRound('game', game.getComputerChoice());
+    game.playRound('paper', game.getComputerChoice());
 });
 
 choiceScissorsBtn.addEventListener('click', () => {
-    game.playRound('game', game.getComputerChoice());
+    game.playRound('scissors', game.getComputerChoice());
 });
